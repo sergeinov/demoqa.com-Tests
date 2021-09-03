@@ -63,6 +63,9 @@ public class PracticeFormTests {
         // selectPictureTest
         $("input#uploadPicture").uploadFile(file);
 
+        // Scrolling the page
+        $("input#uploadPicture").scrollIntoView(true);
+
         // CurrentAddressTest
         $("#currentAddress-wrapper textarea#currentAddress").setValue("Moskow, Lenina 14, a.3").pressEnter();
 
