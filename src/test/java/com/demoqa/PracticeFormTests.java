@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormTests {
 
@@ -38,7 +38,6 @@ public class PracticeFormTests {
         $("#genterWrapper").$(byText("Male")).click();
         $("#genterWrapper").$(byText("Female")).click();
         $("#genterWrapper").$(byText("Other")).click();
-        $("#genterWrapper").$(byText("Other")).isSelected();
 
         // mobilePhoneTest
         $("input#userNumber").setValue("5659874563");
@@ -54,14 +53,12 @@ public class PracticeFormTests {
         // subjectsFieldTest
         $("#subjectsContainer").click();
         $("#subjectsInput").setValue("Hindi").pressEnter();
-        $("#subjectsInput").setValue("Math").pressEnter();
+        $("#subjectsInput").setValue("Maths").pressEnter();
 
         // HobbiesCheckBoxesTest
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#hobbiesWrapper").$(byText("Reading")).click();
 
         // selectPictureTest
         $("input#uploadPicture").uploadFile(file);
@@ -77,5 +74,19 @@ public class PracticeFormTests {
 
         // submitTest
         $("button#submit").pressEnter();
+
+        //Checking filled fields
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("TestName TestLastName"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("test@gmail.com"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Other"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("5659874563"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("13 July,2000"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Hindi, Maths"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Sports, Reading, Music"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("test.pdf"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Moskow, Lenina 14, a.3"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Haryana"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Karnal"));
+
     }
 }
