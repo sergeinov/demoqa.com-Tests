@@ -77,11 +77,5 @@ public class PracticeFormTests {
 
         // submitTest
         $("button#submit").pressEnter();
-
-        // todo
-        //$("input#firstName").shouldHave(value("TestName"));
-        //$("input#lastName").shouldHave(value("TestLastName"));
-        //$("input#userEmail").shouldHave(value("test@gmail.com"));
-        //$("input#userNumber").shouldHave(value("5659874563"));
     }
 }
