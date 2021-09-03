@@ -21,7 +21,7 @@ public class PracticeFormTests {
 
     @Test
     void nameLastNameTest() {
-        String path = "src\\resourses\\testPicture.jpg";
+        String path = "src/test/resourses/img/testPicture.jpg";
         File file = new File(path);
 
         open("/automation-practice-form");
@@ -43,10 +43,8 @@ public class PracticeFormTests {
 
         // dateOfBirthTest
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-dropdown-container--select").click();
-        $(".react-datepicker__year-select").$(byText("2000")).click();
-        $(".react-datepicker__month-dropdown-container--select").click();
-        $(".react-datepicker__month-select").$(byText("July")).click();
+        $(".react-datepicker__year-select").selectOption("2000");
+        $(".react-datepicker__month-select").selectOption("July");
         $(".react-datepicker__month .react-datepicker__week .react-datepicker__day--013").click();
 
         // subjectsFieldTest
@@ -59,14 +57,16 @@ public class PracticeFormTests {
         $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#hobbiesWrapper").$(byText("Music")).click();
 
-        // selectPictureTest
-        $("input#uploadPicture").uploadFile(file);
-
         // Scrolling the page
-        $("input#uploadPicture").scrollIntoView(true);
+        $("#uploadPicture").scrollIntoView(true);
+        //$("t#uploadPicture").scrollIntoView(true).uploadFile(file);
+
+        // selectPictureTest
+        $("#uploadPicture").scrollIntoView(true).uploadFile(file);
+        //$("t#uploadPicture").uploadFromClasspath("/img/testPicture.jpg");
 
         // CurrentAddressTest
-        $("#currentAddress-wrapper textarea#currentAddress").setValue("Moskow, Lenina 14, a.3").pressEnter();
+        $("#currentAddress").setValue("Moskow, Lenina 14, a.3");
 
         // selectStateAndselectCityTest
         $("#state").click();
@@ -78,17 +78,18 @@ public class PracticeFormTests {
         $("button#submit").pressEnter();
 
         //Checking filled fields
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("TestName TestLastName"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("test@gmail.com"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Other"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("5659874563"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("13 July,2000"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Hindi, Maths"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Sports, Reading, Music"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("testPicture.jpg"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Moskow, Lenina 14, a.3"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Haryana"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Karnal"));
+        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
+        $x("//table/tbody").shouldHave(text("TestName TestLastName"));
+        $x("//table/tbody").shouldHave(text("test@gmail.com"));
+        $x("//table/tbody").shouldHave(text("Other"));
+        $x("//table/tbody").shouldHave(text("5659874563"));
+        $x("//table/tbody").shouldHave(text("13 July,2000"));
+        $x("//table/tbody").shouldHave(text("Hindi, Maths"));
+        $x("//table/tbody").shouldHave(text("Sports, Reading, Music"));
+        $x("//table/tbody").shouldHave(text("testPicture.jpg"));
+        $x("//table/tbody").shouldHave(text("Moskow, Lenina 14, a.3"));
+        $x("//table/tbody").shouldHave(text("Haryana"));
+        $x("//table/tbody").shouldHave(text("Karnal"));
 
     }
 }
