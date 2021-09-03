@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -22,7 +21,7 @@ public class PracticeFormTests {
 
     @Test
     void nameLastNameTest() {
-        String path = "D:\\Download\\test.pdf";
+        String path = "src\\resourses\\testPicture.jpg";
         File file = new File(path);
 
         open("/automation-practice-form");
@@ -86,7 +85,7 @@ public class PracticeFormTests {
         $x("//div[@class='modal-body']//table//tbody").shouldHave(text("13 July,2000"));
         $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Hindi, Maths"));
         $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Sports, Reading, Music"));
-        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("test.pdf"));
+        $x("//div[@class='modal-body']//table//tbody").shouldHave(text("testPicture.jpg"));
         $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Moskow, Lenina 14, a.3"));
         $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Haryana"));
         $x("//div[@class='modal-body']//table//tbody").shouldHave(text("Karnal"));
