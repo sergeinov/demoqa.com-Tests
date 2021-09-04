@@ -8,7 +8,8 @@ import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class PracticeFormTests {
 
@@ -21,38 +22,38 @@ public class PracticeFormTests {
 
     @Test
     void nameLastNameTest() {
-        String path = "src/test/resourses/img/testPicture.jpg";
+        String path = "src/test/resources/img/testPicture.jpg";
         File file = new File(path);
 
         open("/automation-practice-form");
 
-        // nameLastNameTest
+        // nameLastName Test
         $("input#firstName").setValue("TestName");
         $("input#lastName").setValue("TestLastName");
 
-        // emailTest
+        // email Test
         $("input#userEmail").setValue("test@gmail.com");
 
-        // GenderRadioButtonTest
+        // GenderRadioButton Test
         $("#genterWrapper").$(byText("Male")).click();
         $("#genterWrapper").$(byText("Female")).click();
         $("#genterWrapper").$(byText("Other")).click();
 
-        // mobilePhoneTest
+        // mobilePhone Test
         $("input#userNumber").setValue("5659874563");
 
-        // dateOfBirthTest
+        // dateOfBirth Test
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("2000");
         $(".react-datepicker__month-select").selectOption("July");
         $(".react-datepicker__month .react-datepicker__week .react-datepicker__day--013").click();
 
-        // subjectsFieldTest
+        // subjectsField Test
         $("#subjectsContainer").click();
         $("#subjectsInput").setValue("Hindi").pressEnter();
         $("#subjectsInput").setValue("Maths").pressEnter();
 
-        // HobbiesCheckBoxesTest
+        // HobbiesCheckBoxes Test
         $("#hobbiesWrapper").$(byText("Sports")).click();
         $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#hobbiesWrapper").$(byText("Music")).click();
@@ -61,35 +62,34 @@ public class PracticeFormTests {
         $("#uploadPicture").scrollIntoView(true);
         //$("t#uploadPicture").scrollIntoView(true).uploadFile(file);
 
-        // selectPictureTest
+        // selectPicture Test
         $("#uploadPicture").scrollIntoView(true).uploadFile(file);
-        //$("t#uploadPicture").uploadFromClasspath("/img/testPicture.jpg");
+        //$("#uploadPicture").uploadFromClasspath("././img/testPicture.jpg");
 
-        // CurrentAddressTest
+        // CurrentAddress Test
         $("#currentAddress").setValue("Moskow, Lenina 14, a.3");
 
-        // selectStateAndselectCityTest
+        // selectStateAndselectCity Test
         $("#state").click();
         $("#state").$(byText("Haryana")).click();
         $("#city").click();
         $("#city").$(byText("Karnal")).click();
 
-        // submitTest
+        // submit Test
         $("button#submit").pressEnter();
 
         //Checking filled fields
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
-        $x("//table/tbody").shouldHave(text("TestName TestLastName"));
-        $x("//table/tbody").shouldHave(text("test@gmail.com"));
-        $x("//table/tbody").shouldHave(text("Other"));
-        $x("//table/tbody").shouldHave(text("5659874563"));
-        $x("//table/tbody").shouldHave(text("13 July,2000"));
-        $x("//table/tbody").shouldHave(text("Hindi, Maths"));
-        $x("//table/tbody").shouldHave(text("Sports, Reading, Music"));
-        $x("//table/tbody").shouldHave(text("testPicture.jpg"));
-        $x("//table/tbody").shouldHave(text("Moskow, Lenina 14, a.3"));
-        $x("//table/tbody").shouldHave(text("Haryana"));
-        $x("//table/tbody").shouldHave(text("Karnal"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("TestName TestLastName"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("test@gmail.com"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Other"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("5659874563"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("13 July,2000"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Hindi, Maths"));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Sports, Reading, Music"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("testPicture.jpg"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("Moskow, Lenina 14, a.3"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
 
     }
 }
