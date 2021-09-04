@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.exactOwnText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -26,6 +27,9 @@ public class PracticeFormTests {
         File file = new File(path);
 
         open("/automation-practice-form");
+
+        // check the title name
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
         // nameLastName Test
         $("input#firstName").setValue("TestName");
@@ -60,7 +64,7 @@ public class PracticeFormTests {
 
         // Scrolling the page
         $("#uploadPicture").scrollIntoView(true);
-        //$("t#uploadPicture").scrollIntoView(true).uploadFile(file);
+        //$("#uploadPicture").scrollIntoView(true).uploadFile(file);
 
         // selectPicture Test
         $("#uploadPicture").scrollIntoView(true).uploadFile(file);
