@@ -21,7 +21,7 @@ public class PracticeFormTests {
     }
 
     @Test
-    void nameLastNameTest() {
+    void formTests() {
         String path = "src/test/resources/img/testPicture.jpg";
         File file = new File(path);
 
