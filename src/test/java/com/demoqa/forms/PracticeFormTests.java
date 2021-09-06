@@ -1,4 +1,4 @@
-package com.demoqa;
+package com.demoqa.forms;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
