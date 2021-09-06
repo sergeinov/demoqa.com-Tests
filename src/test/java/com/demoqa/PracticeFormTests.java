@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static com.codeborne.selenide.Condition.exactOwnText;
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -31,12 +30,13 @@ public class PracticeFormTests {
         // check the title name
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
+
         // nameLastName Test
-        $("input#firstName").setValue("TestName");
-        $("input#lastName").setValue("TestLastName");
+        $("#firstName").setValue("TestName");
+        $("#lastName").setValue("TestLastName");
 
         // email Test
-        $("input#userEmail").setValue("test@gmail.com");
+        $("#userEmail").setValue("test@gmail.com");
 
         // GenderRadioButton Test
         $("#genterWrapper").$(byText("Male")).click();
@@ -79,8 +79,8 @@ public class PracticeFormTests {
         $("#city").click();
         $("#city").$(byText("Karnal")).click();
 
-        // submit Test
-        $("button#submit").pressEnter();
+        // submitting Test
+        $("#submit").pressEnter();
 
         //Checking filled fields
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
@@ -96,4 +96,25 @@ public class PracticeFormTests {
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
 
     }
+
+    @Test
+    void checkRequiredFieldsTest() {
+        open("/automation-practice-form");
+
+        // checking the title name
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+
+        // checking Required Fields
+        $("#submit").scrollIntoView(true);
+        $("#submit").click();
+        $("#firstName").scrollIntoView(true);
+        $(".was-validated").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        $("#lastName").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+        $("[name=gender][value=Other]").parent().shouldHave(cssValue("color", "rgb(33, 37, 41)"));
+        $("[name=gender][value=Male]").parent().shouldHave(cssValue("color", "rgb(33, 37, 41)"));
+        $("[name=gender][value=Female]").parent().shouldHave(cssValue("color", "rgb(33, 37, 41)"));
+        $("#userNumber").shouldHave(cssValue("border-color", "rgb(220, 53, 69)"));
+    }
+
+
 }
