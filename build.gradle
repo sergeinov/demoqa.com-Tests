@@ -6,14 +6,23 @@ repositories {
     mavenCentral()
 }
 
+sourceCompatibility = 11                // download, id we don't have a java
+targetCompatibility = 11
+
+compileTestJava {
+    options.encoding = 'UTF-8'          //  use encoding by default
+}
+
 dependencies {
-    testImplementation (
-            'com.codeborne:selenide:5.24.0',
-            'org.junit.jupiter:junit-jupiter-api:5.7.2')
-    testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.32',
-            'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    // For Selenide
+    testImplementation('com.codeborne:selenide:5.24.0')                 // add the Selenide framework
+    testRuntimeOnly('org.slf4j:slf4j-simple:1.7.32')                    // add more logging at the console
+
+    // For Junit 5
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.7.2')     // adds usage library of junit syntactics
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.7.2')
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform()                  // for using Junit 5
 }
