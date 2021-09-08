@@ -24,5 +24,7 @@ dependencies {
 }
 
 test {
+    systemProperty "chromeoptions.prefs","until.accept_languages = en"  // open the test-browser with necessary language
+
     useJUnitPlatform()                  // for using Junit 5
 }
